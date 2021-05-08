@@ -6,7 +6,11 @@ use Livewire\Component;
 
 class Home extends Component
 {
-    public $subCategory;
+    public $subCategory, $validatedData, $selected = [];
+
+    protected $rules = [
+        'selected' => 'nullable',
+    ];
 
     public function mount()
     {
@@ -14,17 +18,17 @@ class Home extends Component
             [
                 'id' => 1,
                 'name' => 'Biscuit',
-                'selected' => true
+                'selected' => false
             ],
             [
-                'id' => 1,
+                'id' => 2,
                 'name' => 'Chocolate',
                 'selected' => false
             ],
             [
-                'id' => 1,
+                'id' => 3,
                 'name' => 'Wafer',
-                'selected' => true
+                'selected' => false
             ],
         ]);
     }
@@ -33,6 +37,12 @@ class Home extends Component
     {
         $this->subCategory[0]['selected'] = true;
         $this->subCategory[2]['selected'] = true;
+    }
+
+    public function save()
+    {
+        $this->validatedData = $this->validate();
+        dd($this->validatedData);
     }
 
     public function render()

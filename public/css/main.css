@@ -1,0 +1,13 @@
+li[data-selected="true"] {
+    background-color: rgba(59, 130, 246, 1);
+    color: white;
+}
+
+li[data-selected="true"]:hover {
+    background-color: rgba(96, 165, 250, 1);
+}
+
+.multiple-select-list li:hover {
+    background-color: rgba(59, 130, 246, 1);
+    color: white;
+}
