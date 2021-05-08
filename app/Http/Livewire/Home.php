@@ -99,7 +99,13 @@ class Home extends Component
     public function removeTag()
     {
         //array_diff($this->selected, [id]);
-        dd($this->selected);
+        //dd($this->selected);
+    }
+
+    public function clearSelection()
+    {
+        $this->selected = [];
+        $this->dispatchBrowserEvent('clear-selection');
     }
 
     public function save()

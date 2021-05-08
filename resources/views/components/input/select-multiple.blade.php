@@ -2,7 +2,7 @@
     'options'
 ])
 
-<div wire:ignore.self x-data="selectMultiple()" x-on:editing.window="renderSelected(event.detail.selected)" class="relative">
+<div wire:ignore.self x-data="selectMultiple()" x-on:editing.window="renderSelected(event.detail.selected)" x-on:clear-selection.window="clearTags()" class="relative">
     <select {{ $attributes->class(['hidden'])->merge(['class' => '', 'name' => 'multiple', 'multiple' => 'true']) }}>
         <template x-for="(option, index) in options" :key="index">
             <option x-bind:value="option['id']" x-text="option['name']" x-bind:selected="option['selected']"></option>
@@ -14,24 +14,24 @@
         @endforelse --}}
     </select>
 
-    <div wire:ignore class="multiple-selected-container p-2 pt-0 bg-white border border-blue-500 rounded-lg mb-4 flex flex-wrap">
+    <div wire:ignore class="multiple-selected-container p-2 pt-0 bg-white border border-blue-500 rounded-lg mb-4 flex flex-wrap" style="min-height: 54px;">
         <div class="flex items-center text-sm rounded mr-2 mt-2 bg-blue-500 text-white overflow-hidden" data-value="3">
-            <div class="py-2 px-2">Wafer</div> <i class="fas fa-times px-2 py-3 hover:bg-blue-400 cursor-pointer"></i>
+            <div class="py-2 px-2">Wafer</div> <!--<i class="tag-button fas fa-times px-2 py-3 hover:bg-blue-400 cursor-pointer"></i>-->
         </div>
         <div class="flex items-center text-sm rounded mr-2 mt-2 bg-blue-500 text-white overflow-hidden" data-value="3">
-            <div class="py-2 px-2">A very long selected option lies here</div> <i class="fas fa-times px-2 py-3 hover:bg-blue-400 cursor-pointer"></i>
+            <div class="py-2 px-2">A very long selected option lies here</div> <!--<i class="tag-button fas fa-times px-2 py-3 hover:bg-blue-400 cursor-pointer"></i>-->
         </div>
         <div class="flex items-center text-sm rounded mr-2 mt-2 bg-blue-500 text-white overflow-hidden" data-value="3">
-            <div class="py-2 px-2">A very long selected option lies here</div> <i class="fas fa-times px-2 py-3 hover:bg-blue-400 cursor-pointer"></i>
+            <div class="py-2 px-2">A very long selected option lies here</div> <!--<i class="tag-button fas fa-times px-2 py-3 hover:bg-blue-400 cursor-pointer"></i>-->
         </div>
         <div class="flex items-center text-sm rounded mr-2 mt-2 bg-blue-500 text-white overflow-hidden" data-value="3">
-            <div class="py-2 px-2">A very long selected option lies here</div> <i class="fas fa-times px-2 py-3 hover:bg-blue-400 cursor-pointer"></i>
+            <div class="py-2 px-2">A very long selected option lies here</div> <!--<i class="tag-button fas fa-times px-2 py-3 hover:bg-blue-400 cursor-pointer"></i>-->
         </div>
     </div>
 
     <template id="tagTemplate">
         <div class="tag flex items-center text-sm rounded mr-2 mt-2 bg-blue-500 text-white overflow-hidden" data-value="">
-            <div class="tag-name py-2 px-2"></div> <i class="tag-button fas fa-times px-2 py-3 hover:bg-blue-400 cursor-pointer"></i>
+            <div class="tag-name py-2 px-2"></div> <!--<i class="tag-button fas fa-times px-2 py-3 hover:bg-blue-400 cursor-pointer"></i>-->
         </div>
     </template>
 
@@ -111,9 +111,9 @@
                     let clone = template.content.cloneNode(true);
                     let tag = clone.querySelector(".tag");
                     let tagName = clone.querySelector(".tag-name");
-                    let remove = clone.querySelector(".tag-button");
+                    //let remove = clone.querySelector(".tag-button");
 
-                    remove.setAttribute('x-on:click', `$wire.emit('removeTag', ${id})`);
+                    //remove.setAttribute('x-on:click', `$wire.emit('removeTag', ${id})`);
 
                     //remove.addEventListener('click', function(el) {
                     //    console.log(el, el.target.parentNode.dataset.value);
@@ -133,6 +133,14 @@
                     tag.parentNode.removeChild(tag);
                     selected.indexOf(`${id.toString()}`) > -1 ? selected.splice(index, 1) : console.log(`But there is nothing here DIO!`);
                 },
+
+                clearTags() {
+                    let tagContainer = document.querySelector('.multiple-selected-container');
+                    tagContainer.innerHTML = "";
+                    let listContainer = document.querySelector('.multiple-select-list');
+                    let resetStyle = listContainer.querySelectorAll(`li`);
+                    Array.from(resetStyle).forEach(x => x.classList.remove('bg-blue-500', 'text-white'));
+                }
             }
         } 
     </script>    
