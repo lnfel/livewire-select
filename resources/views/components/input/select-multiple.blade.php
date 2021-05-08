@@ -2,8 +2,8 @@
     'options'
 ])
 
-<div x-data="selectMultiple()" class="relative">
-    <select {{ $attributes->merge(['class' => 'hidden', 'name' => 'multiple', 'multiple' => 'true']) }}>
+<div x-data="selectMultiple()" x-on:editing.window="renderSelected(event.detail.selected)" class="relative">
+    <select {{ $attributes->class(['hidden'])->merge(['class' => '', 'name' => 'multiple', 'multiple' => 'true']) }}>
         <template x-for="(option, index) in options" :key="index">
             <option x-bind:value="option['id']" x-text="option['name']" x-bind:selected="option['selected']"></option>
         </template>
@@ -25,7 +25,7 @@
                         x-bind:value="option['id']"
                         x-text="option['name']"
                         x-bind:data-selected="option['selected']"
-                        x-on:click="select(`${option['id']}`, `${option['name']}`, this.$el)"
+                        x-on:click="select(`${option['id']}`, `${option['name']}`, )"
                     ></li>
                 </template>
             </ul>
@@ -54,10 +54,23 @@
                 },
 
                 select(id, name, el) {
-                    let a = document.querySelector(`[x-ref="multiple-${id}"]`);
-                    a.setAttribute('data-selected', 'true');
-                    console.log(a);
-                    this.selected.indexOf(`${id}`) === -1 ? this.selected.push(`${id}`) : console.log(`${name} is already selected.`)
+                    //select.options
+                    //let a = document.querySelector(`[x-ref="multiple-${id}"]`);
+                    //a.setAttribute('data-selected', 'true');
+                    //a.classList.add('bg-blue-500', 'text-white');
+                    //console.log(a.classList);
+                    this.selected.indexOf(`${id}`) === -1 ? this.selected.push(`${id}`) : console.log(`${name} is already selected.`);
+                    //let find = Array.from(this.options).find(x => x.value == id);
+                    //console.log(find, id, Array.from(this.options), ['1', '2']);
+
+                    [...select.options].filter((x) => x.value == id)[0].selected = true;
+                },
+
+                renderSelected(selectedItems) {
+                    for(let i = 0; i < selectedItems.length; i++) {
+                        this.selected.indexOf(`${selectedItems[i]}`) === -1 ? this.selected.push(`${selectedItems[i]}`) : console.log(`Nothing to see here Jotaro!`);
+                        [...select.options].filter((x) => x.value == `${selectedItems[i]}`)[0].selected = true;
+                    }
                 },
             }
         } 

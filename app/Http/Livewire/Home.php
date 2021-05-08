@@ -35,8 +35,10 @@ class Home extends Component
 
     public function loadSelected()
     {
-        $this->subCategory[0]['selected'] = true;
-        $this->subCategory[2]['selected'] = true;
+        //$this->subCategory[0]['selected'] = true;
+        //$this->subCategory[2]['selected'] = true;
+        //dd($this->subCategory[0]);
+        $this->dispatchBrowserEvent('editing', ['selected' => [$this->subCategory[0]['id'], $this->subCategory[2]['id']] ]);
     }
 
     public function save()
