@@ -30,6 +30,56 @@ class Home extends Component
                 'name' => 'Wafer',
                 'selected' => false
             ],
+            [
+                'id' => 4,
+                'name' => 'Wafer',
+                'selected' => false
+            ],
+            [
+                'id' => 5,
+                'name' => 'Wafer',
+                'selected' => false
+            ],
+            [
+                'id' => 6,
+                'name' => 'Wafer',
+                'selected' => false
+            ],
+            [
+                'id' => 7,
+                'name' => 'Wafer',
+                'selected' => false
+            ],
+            [
+                'id' => 8,
+                'name' => 'Wafer',
+                'selected' => false
+            ],
+            [
+                'id' => 9,
+                'name' => 'Wafer',
+                'selected' => false
+            ],
+            [
+                'id' => 10,
+                'name' => 'Wafer',
+                'selected' => false
+            ],
+            [
+                'id' => 11,
+                'name' => 'Wafer',
+                'selected' => false
+            ],
+            [
+                'id' => 12,
+                'name' => 'Wafer',
+                'selected' => false
+            ],
+            [
+                'id' => 13,
+                'name' => 'Wafer',
+                'selected' => false
+            ],
         ]);
     }
 
