@@ -91,6 +91,17 @@ class Home extends Component
         $this->dispatchBrowserEvent('editing', ['selected' => [$this->subCategory[0]['id'], $this->subCategory[2]['id']] ]);
     }
 
+    public function loadAnother()
+    {
+        $this->dispatchBrowserEvent('editing', ['selected' => [$this->subCategory[1]['id']] ]);
+    }
+
+    public function removeTag()
+    {
+        //array_diff($this->selected, [id]);
+        dd($this->selected);
+    }
+
     public function save()
     {
         $this->validatedData = $this->validate();
